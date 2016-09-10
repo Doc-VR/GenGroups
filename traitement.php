@@ -60,7 +60,7 @@ if(sizeof($arrayName) == sizeof($arrayRank) && $sizeTeam >= 2) //si les 2 ont la
 
 	for($i = 0; $i < $sizePersonne; $i++) //crée des objets Equipe
 	{
-		array_push($arrayPersonne, new Personne($i, $arrayName[$i], $arrayRank[$i]));
+		array_push($arrayPersonne, new Personne($arrayName[$i], $arrayRank[$i]));
 	}
 
 	$bongroupe = true ; //condition de la boucle
@@ -73,7 +73,7 @@ if(sizeof($arrayName) == sizeof($arrayRank) && $sizeTeam >= 2) //si les 2 ont la
 
 		for($i = 0; $i < $nbTeam; $i++) //crée des objets Equipe
 		{
-			array_push($arrayTeam, new Equipe($i, $sizeTeam)); //crée une equipe normal
+			array_push($arrayTeam, new Equipe($sizeTeam)); //crée une equipe normal
 		}
 
 		for($i = 0; $i < $modulo; $i++)// rajoute aux equipes les personnes restantes
