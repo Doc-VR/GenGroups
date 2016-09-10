@@ -2,21 +2,15 @@
 
 Class Personne{
 
-	Public $pos; //position dans la liste
-	Public $name;
-	Public $rank;
+	Public $name;//nom
+	Public $rank;//score
 
-	function __construct($pos, $name, $rank)
+	function __construct($name, $rank)
 	{
-		$this->pos = $pos;
 		$this->name = $name;
 		$this->rank = $rank;
 	}
 
-
-	function getPos() {
-        return $this->pos;
-    }
 
     function getName() {
         return $this->name;
@@ -24,10 +18,6 @@ Class Personne{
 
     function getRankPersonne() {
         return $this->rank;
-    }
-
-    function setPos($pos) {
-        $this->pos = $pos;
     }
 
     function setName($name) {
