@@ -9,35 +9,9 @@ set_time_limit (10); //le temps d'execution de la page en secondes
 $sizeTeam = 3; //Taille de chaque groupe
 $offset = 1;
 
-$arrayRank = array(  // rank
-	0 => 2,//Ibrahim
-	1 => 3,//Adrien
-	2 => 5,//Nicolas B
-	3 => 2,//Nicolas J
-	4 => 5,//Mickael
-	5 => 4,//Jeremy
-	6 => 3,//Iann
-	7 => 1,//Kevin
-	8 => 2,//Eric
-	9 => 1,//Manu
-	10 => 5,//Willow
-	11 => 2,//Cyril
-	12 => 2);//Mario
+$arrayRank = array();
 
-$arrayName = array(
-	0 => 'Ibrahim',
-	1 => 'Adrien',
-	2 => 'Nicolas B',
-	3 => 'Nicolas J',
-	4 => 'Mickael',
-	5 => 'Jeremy',
-	6 => 'Iann',
-	7 => 'Kevin',
-	8 => 'Eric',
-	9 => 'Manu',
-	10 => 'Willow',
-	11 => 'Cyril',
-	12 => 'Mario');
+$arrayName = array();
 
 if (isset($_POST)) 
 {
@@ -65,23 +39,22 @@ if (isset($_POST))
 		{
 			$sizeTeam = $value;
 		}
-		
 	}
 }
 
 
-if(sizeof($arrayName) == sizeof($arrayRank) && $sizeTeam >= 2) //si les 2 ont la meme taille et que la taille des groupes est >= a 2
+if(sizeof($arrayName) == sizeof($arrayRank) && $sizeTeam >= 2) //si les 2 ont la même taille et que la taille des groupes est >= a 2
 {
 	$sizePersonne = sizeof($arrayName);
-	$nbTeam = floor($sizePersonne/$sizeTeam); //genere le nombre d'equipes
+	$nbTeam = floor($sizePersonne/$sizeTeam); //génère le nombre d'équipes
 	$modulo = $sizePersonne % $sizeTeam;
-	$arrayRankTemp = $arrayRank; //on copie l'array des score
-	asort($arrayRankTemp);
+	$arrayRankTemp = $arrayRank; //on copie l'array des scores
+	asort($arrayRankTemp);//pour recupèrer les score le plusbas et celui le plus haut
 	$rankMax = $arrayRankTemp[sizeof($arrayRankTemp)-1];
 	$rankMin = $arrayRankTemp[0];
 	
 
-	//creation des objets personnes
+	//création des objets personnes
 
 	$arrayPersonne = array();
 
@@ -103,16 +76,16 @@ if(sizeof($arrayName) == sizeof($arrayRank) && $sizeTeam >= 2) //si les 2 ont la
 			array_push($arrayTeam, new Equipe($i, $sizeTeam)); //crée une equipe normal
 		}
 
-		for($i = 0; $i < $modulo; $i++)// rajoute aux equipes le reste de la division
+		for($i = 0; $i < $modulo; $i++)// rajoute aux equipes les personnes restantes
 		{
 			$arrayTeam[$i]->setSize($sizeTeam + 1);
 		}
 
-		//On melange les objets personnes
+		//On mélange les objets personnes
 
 		shuffle($arrayPersonne);
 
-		//attribution des personnes aux equipes
+		//attribution des personnes aux équipes
 		$i = 0;
 		$totalRank = 0;
 
@@ -129,11 +102,11 @@ if(sizeof($arrayName) == sizeof($arrayRank) && $sizeTeam >= 2) //si les 2 ont la
 
 
 
-		$moyRank = $totalRank / $nbTeam; //on recupere le rank moyen
+		$moyRank = $totalRank / $nbTeam; //on récupère le score moyen
 
 		$offset = 2;//$moyRank - ($rankMin + $rankMax + $nbTeam); //abs($rankMax + $rankMin - $moyRank + $modulo)+0.1; //calcule la marge pour la validation des groupes
 
-		//verification si les equipes sont bonnes
+		//verification si les équipes sont bonnes
 
 		$validation = 0;
 
