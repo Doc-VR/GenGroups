@@ -2,22 +2,16 @@
 
 Class Equipe{
 
-	Public $pos; //position
 	Public $size; //taille de l'equipe
 	Public $personnes = array(); //array de personnes
-	Public $rank; //somme des rank des personnes
+	Public $rank; //somme des score des personnes
 
-	function __construct($pos, $size)
+	function __construct($size)
 	{
-		$this->pos= $pos;
 		$this->size = $size;
 		$this->rank = 0;
 	}
 
-
-    function getPos() {
-        return $this->pos;
-    }
 
     function getPersonnes() {
         return $this->personnes;
@@ -29,10 +23,6 @@ Class Equipe{
 
     function setSize($size) {
         $this->size = $size;
-    }
-
-    function setPos($pos) {
-        $this->pos = $pos;
     }
 
     function setPersonnes($personnes) {
