@@ -3,8 +3,9 @@
 
 ## Fonctionement
 On choisit le nombre d'individus par groupe ( >2 ).
-Pour chaque individu on rentre son nom et son score. Le score n'a pas de limite, Il peut etre de 0 a 10 comme de 0 a 100 ou meme de 50 a 500.
-Apres avoir appuyé sur Envoyer des groupes homogènes sont affichés sur le coté droit.
+Pour chaque individu on rentre son nom et son score. 
+Le score n'a pas de limite, Il peut être de 0 à 10 comme de 0 à 100 ou meme de 50 à 500.
+Apres avoir appuyé sur Envoyer, des groupes homogènes sont affichés sur le côté droit.
 
 ![Exemple](img.png)
 
@@ -17,20 +18,21 @@ Apres avoir appuyé sur Envoyer des groupes homogènes sont affichés sur le cot
 * index (Affichage de la page unique)
 
 ### Traitement
-* traitement.php (Reçoit la requette Ajax, la traite et renvoie une reponse)
+* traitement.php (Reçoit la requête Ajax, la traite et renvoie une réponse)
 
 ### Ressourses
 * Fichiers Bootstrap
 * mycss.css (mon css)
-* myjs.js (mon javascript pour faire apparaitre les champs supplementaires et envoyer la requette Ajax)
+* myjs.js (mon javascript pour faire apparaître les champs supplémentaires et envoyer la requête Ajax)
 
-## Formules utilisé
+## Formules utilisées
 * nbGroupe = nbPersonne / tailleEquipe
-* scoreTaotal = SOMME(score chaque personne)
+* scoreTotal = SOMME(score chaque personne)
 * scoreMoyen = scoreTotal / nbGroupe
 * reste = nbPersonne % tailleEquipe
 * Offset = scoreMoyen - (scoreMin + scoreMax + nbGroupe)
 
 ## A faire
 * Bouton pour supprimer un champ
+* Amélioration de la formule de l'offset
 * Test unitaire
