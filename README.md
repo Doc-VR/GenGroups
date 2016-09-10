@@ -36,3 +36,4 @@ Apres avoir appuyé sur Envoyer, des groupes homogènes sont affichés sur le c�
 * Bouton pour supprimer un champ
 * Amélioration de la formule de l'offset
 * Test unitaire
+* Gestion des erreures
