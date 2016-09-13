@@ -12,6 +12,13 @@ Class Equipe{
 		$this->rank = 0;
 	}
 
+    public function jsonSerialize()
+    {
+        $vars = get_object_vars($this);
+
+        return $vars;
+    }
+
 
     function getPersonnes() {
         return $this->personnes;

@@ -11,6 +11,13 @@ Class Personne{
 		$this->rank = $rank;
 	}
 
+    public function jsonSerialize()
+    {
+        $vars = get_object_vars($this);
+
+        return $vars;
+    }
+
 
     function getName() {
         return $this->name;
