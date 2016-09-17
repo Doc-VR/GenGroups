@@ -1,34 +1,40 @@
 <?php
+require_once('ToJson.php');
 
-Class Personne{
+Class Personne implements ToJson{
 
-	Public $name;//nom
-	Public $rank;//score
+	Private $name;//nom
+	Private $rank;//score
 
 	function __construct($name, $rank)
 	{
 		$this->name = $name;
 		$this->rank = $rank;
-	}
+	} 
 
-    public function jsonSerialize()
+    /*
+    *   implémenté de ToJson
+    */
+
+    function jsonEncode()
     {
-        $vars = get_object_vars($this);
-
-        return $vars;
+        return get_object_vars($this);
     }
 
+    /*
+    *   Getters & Setters
+    */
 
     function getName() {
         return $this->name;
     }
 
-    function getRankPersonne() {
-        return $this->rank;
-    }
-
     function setName($name) {
         $this->name = $name;
+    }
+
+    function getRankPersonne() {
+        return $this->rank;
     }
 
     function setRank($rank) {

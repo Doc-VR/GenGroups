@@ -1,5 +1,5 @@
 <?php
-
+require_once('ToJson.php');
 include('Personne.php');
 include('Equipe.php');
 
@@ -7,7 +7,7 @@ include('Equipe.php');
 set_time_limit (10); //le temps d'execution de la page en secondes
 
 $sizeTeam = 3; //Taille de chaque groupe
-$offset = 1;
+$offset = 3;
 
 $arrayRank = array();
 
@@ -130,9 +130,17 @@ if(sizeof($arrayName) == sizeof($arrayRank) && $sizeTeam >= 2) //si les 2 ont la
 	/*var_dump($tours);
 	var_dump($moyRank);
 	var_dump($modulo);
-	var_dump($offset);
-	var_dump($arrayTeam);*/
-	$json = json_encode($arrayTeam);
+	var_dump($offset);*/
+	//var_dump($arrayTeam);
+
+	$dataOfEquipes = array();
+	foreach ($arrayTeam as $key => $value) 
+	{
+		array_push($dataOfEquipes, $value->jsonEncode());
+	}
+	$json = json_encode($dataOfEquipes);
+	
+	//$json = json_encode($arrayTeam);
 	echo $json;
 
 }

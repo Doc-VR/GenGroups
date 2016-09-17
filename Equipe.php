@@ -1,23 +1,55 @@
 <?php
+require_once('ToJson.php');
 
-Class Equipe{
+Class Equipe implements ToJson{
 
-	Public $size; //taille de l'equipe
-	Public $personnes = array(); //array de personnes
-	Public $rank; //somme des score des personnes
+	Private $size; //taille de l'equipe
+	Private $personnes; //array de personnes
+	Private $rank; //somme des score des personnes
 
 	function __construct($size)
 	{
 		$this->size = $size;
+        $this->personnes = array();
 		$this->rank = 0;
 	}
 
-    public function jsonSerialize()
-    {
-        $vars = get_object_vars($this);
+    /*
+    *   implémenté de ToJson
+    */
 
-        return $vars;
+    function jsonEncode()
+    {
+        $dataOfPersonnes = array();
+        foreach ($this->personnes as $key => $value) 
+        {
+            array_push($dataOfPersonnes, $value->jsonEncode());
+        }
+        $dataOfEquipe = array($this->size, $this->rank);
+        array_push($dataOfEquipe, $dataOfPersonnes);
+        return $dataOfEquipe;
     }
+
+    /*
+    *   Getters & Setters
+    */
+
+    function setRank() 
+    {
+        foreach ($this->personnes as $value) 
+        {
+            $this->rank += $value->getRankPersonne();
+        }
+    }
+
+    function addPersonnes($personne) {
+        array_push($this->personnes, $personne);
+    }
+
+    function delPersonnes() {
+        $this->personnes = array();
+    }
+
 
 
     function getPersonnes() {
@@ -36,24 +68,8 @@ Class Equipe{
         $this->personnes = $personnes;
     }
 
-    function addPersonnes($personne) {
-        array_push($this->personnes, $personne);
-    }
-
-    function delPersonnes() {
-        $this->personnes = array();
-    }
-
     function getRankEquipe() {
         return $this->rank;
-    }
-
-    function setRank() 
-    {
-    	foreach ($this->personnes as $value) 
-    	{
-    		$this->rank += $value->getRankPersonne();
-    	}
-    }
+    }   
 }
-//fgsdkohgosjkdhgljsh
+

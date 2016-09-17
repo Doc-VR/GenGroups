@@ -6,19 +6,19 @@
 	overflow-y: auto;
 }
 
-#btnAjouter
+#btnAjouter, #btnSupprimer
 {
 	margin-top: 23px;
 }
 
-#ajouter
+#ajouter, #supprimer
 {
 	width: 38px; 
 	display: block;
 	margin: auto;
 }
 
-span
+.add, .sup
 {
 	color: #337ab7;
 }

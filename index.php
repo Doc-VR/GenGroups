@@ -11,42 +11,57 @@
   <script src="ressources/js/myJs.js"></script>
 </head>
 <body>
+	<!-- ensemble  -->
 	<div class="container">
 	  	<h1 class="text-center">Création de Groupes Aléatoires</h1>
 	  	<hr>
+	  	<!-- Coté gauche -->
 	   	<form class="form-group col-md-6" id="formulaire">
 	   		<h3 class="text-center">Formulaire</h3>
+	   		<!-- Champ nbPersonnes -->
 		  	<div class="form-group col-md-12">
-			    <label for="nbPerGroup">Nombre de Personnes Minimum par Groupe</label>
+			    <label for="nbPerGroup">Nombre d'Eléments Minimum par Groupe</label>
 			    <input class="form-control input-sm" id="nbPerGroup" type="number">
 		  	</div>
-			<div id="ajoute">
-				<div id="ComboAjout">
+			<div id="listCombo">
+				<div class="comboNomScoreBtn">
+					<!-- Champ nom -->
 					<div class="form-group col-md-5">
 					    <label for="nomInput">Nom</label>
 					    <input class="form-control nom input-sm" id="nomInput" type="text" >
 				  	</div>
+				  	<!-- Champ score -->
 				  	<div class="form-group col-md-3">
 					    <label for="scoreInput">Score</label>
 					    <input class="form-control score input-sm" id="scoreInput" type="number" >
 				  	</div>
+				  	<!-- Bouton d'ajout ou de suppression de champs -->
+				  	<div class="form-group col-md-4" id="btnAjouter">
+				  		<button type='button' class="btn btn-default form-control btn-sm" id="ajouter" onclick="ajoutChamp(this)">
+				  			<span class="glyphicon glyphicon-plus add" ></span>
+				  		</button>
+				  	</div>
+				  	<!-- Affiche des erreures specifique a un champ -->
+				  	<div class="form-group col-md-12 errorChamp">
+					    
+				  	</div>
 				</div>
 			</div>
-		  	<div class="form-group col-md-4" id="btnAjouter">
-		  		<button type='button' class="btn btn-default form-control btn-sm" id="ajouter" onclick="ajoutChamp()">
-		  			<span class="glyphicon glyphicon-plus" ></span>
-		  		</button>
+			<!-- Affichage des erreures -->
+			<div class="form-group col-md-12" id="errors">
+			    
 		  	</div>
+			<!-- Bouton envoyer -->
 			<div class="form-group col-md-12">
-			    <button type="button" class="btn btn-primary" onclick="envoiAjax()">Envoyer</button>
+			    <button type="button" class="btn btn-primary" onclick="verifChamps(false)">Envoyer</button>
 		  	</div>
 		</form>
+		<!-- Coté droit -->
 		<div class="col-md-6">
 			<h3 class="text-center">Résultat</h3>
 			<div id="results">
 				
 			</div>
-			
 		</div>
 	</div>
 </body>
