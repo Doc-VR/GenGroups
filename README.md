@@ -37,4 +37,4 @@ Apres avoir appuyé sur Envoyer, des groupes homogènes sont affichés sur le c�
 * Test unitaire
 * Gestion des erreures coté serveur et l'affichage coté client
 * Coté client verification si 2 champs ont le meme nom
-* Ajout de 2 boutons affichage des score des equipes et affichage des score des elements
+* Ajout de 2 boutons, affichage des scores des equipes et affichage des scores des elements
