@@ -66,16 +66,26 @@ function verifChamps(ajoutChamp) //ajoutChamp = true si c'est cette fonction qui
             countChampErrors++;
         }
 
+        for (var y = 0; y < tabNom.length; y++) 
+        {
+            if(y != i && tabNom[i].value === tabNom[y].value) //si 2 noms sont identiques
+            {
+                champError += "<span class='glyphicon glyphicon-remove' ></span> Ce nom existe deja<br/>";
+                countChampErrors++;
+                break;
+            }
+        }
+
         if(countChampErrors > 0)
         {
-            //on affiche les erreures pour cette ligne
+            //on affiche les erreurs pour cette ligne
             divError.innerHTML = champError;
             tabError[i].appendChild(divError.cloneNode(true));
             countFormErrors++;
         }
     }
 
-    errors.innerHTML = "";//on enleve les ancienes erreures
+    errors.innerHTML = "";//on enleve les ancienes erreurs
     
     if (minElements && countFormErrors < 1)
     {
@@ -86,17 +96,17 @@ function verifChamps(ajoutChamp) //ajoutChamp = true si c'est cette fonction qui
     }
     else
     {
-        if(countFormErrors == 1)//si une erreure
+        if(countFormErrors == 1)//si une erreur
         {
-            formError += "<span class='glyphicon glyphicon-remove' ></span> Une erreure dans les champs";
+            formError += "<span class='glyphicon glyphicon-remove' ></span> Une erreur dans les champs";
         }
         else if(countFormErrors > 1)//si plusieurs
         {
-            formError += "<span class='glyphicon glyphicon-remove' ></span> "+countFormErrors+" erreures dans les champs";
+            formError += "<span class='glyphicon glyphicon-remove' ></span> "+countFormErrors+" erreurs dans les champs";
         }
 
         divError.innerHTML = formError;
-        errors.appendChild(divError); //on affiche les erreures
+        errors.appendChild(divError); //on affiche les erreurs
     }
 }
 
@@ -105,6 +115,9 @@ function envoiAjax()
 	var nbGroup = document.getElementById('nbPerGroup').value;
 	var tableNom = document.getElementsByClassName("nom");
 	var tableScore = document.getElementsByClassName("score");
+    var isScorePer = document.getElementById('scorePer').checked;
+    var isScoreEqu = document.getElementById('scoreEqu').checked;
+
 	
 	var tableScoreValue = [];
 	var tableNomValue = [];
@@ -161,10 +174,12 @@ function envoiAjax()
     	str += "score["+i+"]="+tableScoreValue[i]+"&";	
     }
 
-    str += "groupe="+nbGroup;
+    str += "nbGroupe="+nbGroup+"&";
+    str += "isScorePer="+isScorePer+"&";
+    str += "isScoreEqu="+isScoreEqu;
 
 
-    xhttp.open("POST", "traitement.php",true);
+    xhttp.open("POST", "controlleur.php",true);
     xhttp.setRequestHeader("content-Type", "application/x-www-form-urlencoded");
     xhttp.setRequestHeader("X-Requested-With","XMLHttpRequest");
     xhttp.send(str);
