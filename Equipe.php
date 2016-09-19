@@ -25,8 +25,8 @@ Class Equipe implements ToJson{
         {
             array_push($dataOfPersonnes, $value->jsonEncode());
         }
-        $dataOfEquipe = array($this->size, $this->rank);
-        array_push($dataOfEquipe, $dataOfPersonnes);
+        $dataOfEquipe = array( "taille" => $this->size, "score" => $this->rank, "personnes" => $dataOfPersonnes);
+        //array_push($dataOfEquipe, "personnes" => $dataOfPersonnes);
         return $dataOfEquipe;
     }
 

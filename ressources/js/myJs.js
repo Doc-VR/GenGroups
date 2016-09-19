@@ -11,13 +11,13 @@ function ajoutChamp(x) //rajoute un combo nom + score , x = this (le bouton ou o
     x.setAttribute('onclick', 'suppChamp(this)');
     x.setAttribute('id', 'supprimer');
     x.innerHTML = "<span class='glyphicon glyphicon-minus sup' ></span>";
-    verifChamps(true);
+    //verifChamps(true);
 }
 
 function suppChamp(x) //supprime un combo nom + score
 {
     x.parentNode.parentNode.innerHTML = ""; // le champ est supprimé mais son conteneur div comboNomScoreBtn ne l'est pas
-    verifChamps(true);
+    //verifChamps(true);
 }
 
 function verifChamps(ajoutChamp) //ajoutChamp = true si c'est cette fonction qui l'appele
@@ -135,29 +135,68 @@ function envoiAjax()
     {
         if (this.readyState == 4 && this.status == 200)
         {
-            var html = this.responseText;
-        	//console.log(this.responseText);
-        	//var html = this.responseText;
-            //var json_reponse = JSON.parse(this.responseText);
-           // console.log(json_reponse);
-            //var html = "";
-            /*for(i = 0; i < json_reponse.length; i++)
-            {
-                var numGroupe = i+1;
-                html +=  "<div class='panel panel-info'>"+
-                        "<div class='panel-heading'>"+
-                        "<h4 class='panel-title'> Groupe : "+numGroupe+" Valeur du Groupe : "+json_reponse[i].rank+"</h4>"+
-                        "</div>"+
-                        "<ul class='list-group'>";
+            //var html = this.responseText;
 
-                for(y = 0; y < json_reponse[i].personnes.length; y++)
-                {
-    				html+= "<li class='list-group-item'>"+json_reponse[i].personnes[y].name+"</li>";
-                }
-    					 	
-    			html +=	"</ul>"+
+            var json_reponse = JSON.parse(this.responseText);
+
+            var html = "";
+
+            html += "<div class='panel panel-success'>"+ //on affiche les paramètres
+                        "<div class='panel-heading'>"+
+                        "<h4 class='panel-title'>Paramètres</h4>"+
+                        "</div>"+
+                        "<ul class='list-group'>"+
+                        "<li class='list-group-item'>Nombre d'essais avant de trouver la bonne solution : <strong>"+json_reponse[0].tours+"</strong></li>"+
+                        "<li class='list-group-item'>Marge d'erreur lors du calcul des groupes : <strong>"+json_reponse[0].offSet+"</strong></li>"+
+                        "</ul>"+
                         "</div>";
-            }*/
+
+            if(json_reponse[0].erreurs != "") //si il y a une erreur on l'affiche
+            {
+                html +=  "<div class='panel panel-danger'>"+
+                        "<div class='panel-heading'>"+
+                        "<h4 class='panel-title'>Erreur</h4>"+
+                        "</div>"+
+                        "<ul class='list-group'>"+
+                        "<li class='list-group-item'>"+json_reponse[0].erreurs+"</li>"+
+                        "</ul>"+
+                        "</div>";
+            }
+            else    //sinon on affiche les groupes
+            {
+                for(i = 1; i < json_reponse.length; i++)
+                {
+                    var numGroupe = i;
+                    var scoreGroupe = "";
+                    var scorePersonne = "";
+
+                    if(isScoreEqu)
+                    {
+                        scoreGroupe = " Score du Groupe : "+json_reponse[i].score;
+                    }
+
+                    html +=  "<div class='panel panel-primary'>"+
+                            "<div class='panel-heading'>"+
+                            "<h4 class='panel-title'> Groupe : "+numGroupe+" Taille : "+json_reponse[i].taille+" "+scoreGroupe+"</h4>"+
+                            "</div>"+
+                            "<ul class='list-group'>";
+
+                    for(y = 0; y < json_reponse[i].personnes.length; y++)
+                    {
+                        if(isScorePer)
+                        {
+                            scorePersonne = " Score de l'élément : "+json_reponse[i].personnes[y].rank;
+                        }
+
+                        html+= "<li class='list-group-item'>"+json_reponse[i].personnes[y].name+" "+scorePersonne+"</li>";
+                    }
+                                
+                    html += "</ul>"+
+                            "</div>";
+
+                }
+            }
+
             document.getElementById("results").innerHTML = html;
         }
     };
@@ -174,14 +213,11 @@ function envoiAjax()
     	str += "score["+i+"]="+tableScoreValue[i]+"&";	
     }
 
-    str += "nbGroupe="+nbGroup+"&";
-    str += "isScorePer="+isScorePer+"&";
-    str += "isScoreEqu="+isScoreEqu;
+    str += "nbGroupe="+nbGroup;
 
 
-    xhttp.open("POST", "controlleur.php",true);
+    xhttp.open("POST", "controleur.php",true);
     xhttp.setRequestHeader("content-Type", "application/x-www-form-urlencoded");
     xhttp.setRequestHeader("X-Requested-With","XMLHttpRequest");
     xhttp.send(str);
-
 }

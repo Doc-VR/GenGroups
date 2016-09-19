@@ -28,12 +28,12 @@
 					<!-- Champ nom -->
 					<div class="form-group col-md-5">
 					    <label for="nomInput">Nom</label>
-					    <input class="form-control nom input-sm" id="nomInput" type="text" onkeyup="verifChamps(true)" >
+					    <input class="form-control nom input-sm" id="nomInput" type="text">
 				  	</div>
 				  	<!-- Champ score -->
 				  	<div class="form-group col-md-3">
 					    <label for="scoreInput">Score</label>
-					    <input class="form-control score input-sm" id="scoreInput" type="number" onchange="verifChamps(true)" >
+					    <input class="form-control score input-sm" id="scoreInput" type="number">
 				  	</div>
 				  	<!-- Bouton d'ajout ou de suppression de champs -->
 				  	<div class="form-group col-md-4" id="btnAjouter">

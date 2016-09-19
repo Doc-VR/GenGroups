@@ -1,6 +1,7 @@
 <?php
 include('Personne.php');
 include('Equipe.php');
+include('Message.php');
 
 Class Traitement
 {
@@ -19,10 +20,7 @@ Class Traitement
 	private $scoreTotal;
 	private $scoreMoy;
 
-	private $isScorePer;
-	private $isScoreEqu;
-
-	private $tour;
+	private $tours;
 	private $error;
 
 	public function __construct($arrayPost)
@@ -42,18 +40,15 @@ Class Traitement
 		$this->scoreTotal = 0;
 		$this->scoreMoy = 0;
 
-		$this->isScorePer = false;
-		$this->isScoreEqu = false;
-
-		$this->tour = 0;
-		$this->error = "";
+		$this->tours = 0;
+		$this->erreur = "";
 
 		$this->extract($arrayPost);
 		$this->genPersonne();
 
 		do    		//fait la boucle tant que les groupes ne sont pas bons
 		{
-			$this->tour++;
+			$this->tours++;
 			$this->genGroupe();
 		}
 		while($this->verification());
@@ -77,14 +72,6 @@ Class Traitement
 					array_push($this->arrayScore, $score);
 				}
 			}
-			elseif($key == "isScorePer")
-			{
-				$this->isScorePer = $value;
-			}
-			elseif($key == "isScoreEqu")
-			{
-				$this->isScoreEqu = $value;
-			}
 			else//sinon c'est nbGroupe
 			{
 				$this->tailleEquipe = $value;
@@ -95,7 +82,7 @@ Class Traitement
 		$this->nbEquipe = floor($this->nbPersonne / $this->tailleEquipe); //génère le nombre d'équipes
 		$this->modulo = $this->nbPersonne % $this->tailleEquipe;
 
-		//recupération du score le plus etplus bas pour le calcul de l'offset 
+		//recupération du score le plus haut et plus bas pour le calcul de l'offset 
 
 		/*$arrayRankTemp = $arrayRank; //on copie l'array des scores
 		asort($arrayRankTemp);//pour recupèrer les score le plusbas et celui le plus haut
@@ -161,6 +148,12 @@ Class Traitement
 			}
 		}
 
+		if($this->tours > 1000) //si le nombre de tours est superieur a 1000 c'est qu'aucune solution n'est possible avec l'offset actuel
+		{
+			$this->erreur = "Erreur : Calcul impossible l'offset est surement trop bas";
+			return false;
+		}
+
 		if($validation == $this->nbEquipe) 
 		{
 			return false;
@@ -173,11 +166,17 @@ Class Traitement
 
 	public function reponse() //retour le json
 	{
+		$message = new Message($this->erreur, $this->tours, $this->offSet);
+
 		$dataOfEquipes = array();
+
+		array_push($dataOfEquipes, $message->jsonEncode());
+
 		foreach ($this->arrayEquipe as $key => $value) 
 		{
 			array_push($dataOfEquipes, $value->jsonEncode());
 		}
+
 		$json = json_encode($dataOfEquipes);
 		
 		return $json;
