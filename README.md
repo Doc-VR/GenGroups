@@ -33,7 +33,8 @@ Apres avoir appuyé sur Envoyer, des groupes homogènes sont affichés sur le c�
 * Offset = scoreMoyen - (scoreMin + scoreMax + nbGroupe)
 
 ## A faire
-* Bouton pour supprimer un champ
 * Amélioration de la formule de l'offset
 * Test unitaire
-* Gestion des erreures
+* Gestion des erreures coté serveur et l'affichage coté client
+* Coté client verification si 2 champs ont le meme nom
+* Ajout de 2 boutons, affichage des scores des equipes et affichage des scores des elements
