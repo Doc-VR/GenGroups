@@ -36,7 +36,7 @@ Class Traitement
 
 		$this->nbEquipe = 0;
 		$this->modulo = 0;
-		$this->offSet = 3;
+		$this->offSet = 1;
 		$this->scoreTotal = 0;
 		$this->scoreMoy = 0;
 
@@ -100,7 +100,7 @@ Class Traitement
 			$this->scoreTotal += $this->arrayScore[$i];
 		}
 
-		$this->scoreMoy = $this->scoreTotal / $this->nbPersonne;
+		$this->scoreMoy = $this->scoreTotal / $this->nbEquipe;
 	}
 
 	private function genGroupe() //génére les groupes

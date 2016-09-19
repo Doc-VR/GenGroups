@@ -172,7 +172,7 @@ function envoiAjax()
 
                     if(isScoreEqu)
                     {
-                        scoreGroupe = " Score du Groupe : "+json_reponse[i].score;
+                        scoreGroupe = "Score : <strong>"+json_reponse[i].score+"</strong>";
                     }
 
                     html +=  "<div class='panel panel-primary'>"+
@@ -185,10 +185,10 @@ function envoiAjax()
                     {
                         if(isScorePer)
                         {
-                            scorePersonne = " Score de l'élément : "+json_reponse[i].personnes[y].rank;
+                            scorePersonne = json_reponse[i].personnes[y].rank;
                         }
 
-                        html+= "<li class='list-group-item'>"+json_reponse[i].personnes[y].name+" "+scorePersonne+"</li>";
+                        html+= "<li class='list-group-item'>"+json_reponse[i].personnes[y].name+" <span class='badge'>"+scorePersonne+"</span></li>";
                     }
                                 
                     html += "</ul>"+
